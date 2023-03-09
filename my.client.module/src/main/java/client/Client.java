@@ -21,7 +21,19 @@ import java.util.ServiceLoader;
 //
 //    2021  java --module-path modules --module my.client.module/client.Client
 
+/*
+In a migration situation:
+  regular jar on --module-path becomes "automatic" module
+  - name from jar name (META-INF)
+  - has access to the classpath (known as "unnamed module")
+  - declared module CANNOT ACCESS classpath
+  - export everything, open everything
+  - cannot express "requires", so might need to use --add-modules on command
+    line to ensure all needed modules are available
 
+  unnamed module (aka classpath) can read anything
+  - but again, might need --add-modules to get the modules loaded
+ */
 /*
   in regular classpath operation:
     public is "anywhere in the running JVM"
